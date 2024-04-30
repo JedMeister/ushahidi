@@ -2,7 +2,7 @@
 
 dl() {
     [ "$FAB_HTTP_PROXY" ] && PROXY="--proxy $FAB_HTTP_PROXY"
-    cd $2; curl -L -f -O $PROXY $1; cd -
+    cd "$2"; curl -L -f -O "$PROXY" "$1"; cd -
 }
 
 SRC=/usr/local/src
@@ -11,5 +11,5 @@ VERSION=$(gh_releases "$REPO" | sort -V | grep -v 'rc' | tail -1)
 FILE="ushahidi-platform-release-$VERSION.tar.gz"
 URL="https://github.com/$REPO/releases/download/$VERSION/$FILE"
 
-dl $URL $SRC
-mv $SRC/$FILE $SRC/ushahidi.tar.gz
+dl "$URL" $SRC
+mv "$SRC/$FILE" "$SRC/ushahidi.tar.gz"

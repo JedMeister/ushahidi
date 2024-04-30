@@ -13,11 +13,11 @@ WEBROOT=/var/www/ushahidi
 # configure turnkey-composer & turnkey-artisan
 for script in composer artisan; do
     sed -i "\|^export WEBROOT| s|=.*|=$WEBROOT|" /usr/local/bin/turnkey-$script
-dome
+done
 
 # unpack tarball & cleanup
 tar -xvf $SRC/ushahidi.tar.gz -C $SRC
-mkdir -p $(dirname $WEBROOT) # should exist; but just in case...
+mkdir -p "$(dirname $WEBROOT)" # should exist; but just in case...
 mv $SRC/ushahidi-platform-release-*/html $WEBROOT
 rm -rf $SRC/ushahidi*
 
