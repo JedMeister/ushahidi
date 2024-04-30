@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+[[ -z "$DEBUG" ]] || set -x
+
+export WEBROOT=/var/www/ushahidi
+export ARTISAN_BIN=$(cd $WEBROOT && find . -type f -name artisan)
+
+export ARTISAN_USER="${ARTISAN_USER:-www-data}"
+export ARTISAN_DIR="${ARTISAN_DIR:-$WEBROOT}"
+
+COMMAND="cd $WEBROOT; php '$ARTISAN_BIN'"
+
+/usr/sbin/runuser $ARTISAN_USER -s /bin/bash -c "$COMMAND $(printf '%q ' "$@")"
